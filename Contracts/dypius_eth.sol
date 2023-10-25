@@ -796,7 +796,7 @@ pragma solidity 0.6.12;
 
 
 // DeFiYieldProtocol with Governance.
-contract DeFiYieldProtocol is ERC20("Dypius", "DYP"), Ownable {
+contract Dypius is ERC20("Dypius", "DYP"), Ownable {
     /// @notice Creates total supply of 229.926.862 DYP
     constructor() public {
         _mint(msg.sender, 229926862000000000000000000);
