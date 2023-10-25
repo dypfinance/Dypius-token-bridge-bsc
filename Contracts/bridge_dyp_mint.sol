@@ -597,7 +597,6 @@ contract Bridge is Ownable, ReentrancyGuard {
     
     event Deposit(address indexed account, uint amount, uint blocknumber, uint timestamp, uint id);
     event Withdraw(address indexed account, uint amount, uint id);
-    event TransferOwnershipDyp(address indexed newOwner);
     
     mapping (address => uint) public lastUpdatedTokenWithdrawTimestamp;
     mapping (address => uint) public lastUpdatedTokenWithdrawAmount;
@@ -608,13 +607,6 @@ contract Bridge is Ownable, ReentrancyGuard {
     
     // deposit index for current chain
     uint public lastDepositIndex;
-
-    function transferOwnershipDyp(address newOwner) external onlyOwner {
-    	require(newOwner != address(0), "Ownable: new owner is the zero address");
-    	dypContract.transferOwnership(newOwner);
-
-    	emit TransferOwnershipDyp(newOwner);
-    }
     
     function setVerifyAddress(address newVerifyAddress) external noContractsAllowed onlyOwner {
         verifyAddress = newVerifyAddress;
@@ -657,11 +649,6 @@ contract Bridge is Ownable, ReentrancyGuard {
         }
         lastUpdatedTokenWithdrawAmount[account] = lastUpdatedTokenWithdrawAmount[account].add(amount);
         return lastUpdatedTokenWithdrawAmount[account] <= dailyTokenWithdrawLimitPerAccount;
-    }
-    
-    // the Bridge is a centralized service, allow admin to transfer any ERC20 token if required in case of emergencies
-    function transferAnyERC20Token(address tokenAddress, address recipient, uint amount) external noContractsAllowed onlyOwner {
-        IERC20(tokenAddress).safeTransfer(recipient, amount);
     }
     
     /// signature methods.
