@@ -699,7 +699,7 @@ abstract contract Ownable is Context {
 // File: contracts/Dypius.sol
 
 contract Dypius is ERC20("Dypius", "DYP"), Ownable {
-    uint256 public MAX_SUPPLY;
+    uint256 public immutable  MAX_SUPPLY;
     /// @notice Creates max supply of DYP
     constructor(uint256 MAX_SUPPLY_TOKEN) Ownable(msg.sender) {
         MAX_SUPPLY = MAX_SUPPLY_TOKEN;
