@@ -795,11 +795,11 @@ contract Ownable is Context {
 pragma solidity 0.6.12;
 
 
-// DeFiYieldProtocol with Governance.
+// Dypius with Governance.
 contract Dypius is ERC20("Dypius", "DYP"), Ownable {
     /// @notice Creates total supply of 229.926.862 DYP
     constructor() public {
-        _mint(msg.sender, 229926862000000000000000000);
+        _mint(msg.sender, 229_926_862e18);
     }
 
     /// @notice A record of each accounts delegate
